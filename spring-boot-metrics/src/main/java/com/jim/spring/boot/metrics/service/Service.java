@@ -45,15 +45,20 @@ public class Service {
     public void consoleAllMeter(){
         while (true){
             try {
-                long count = meterRegistry.getMeters().stream().filter( n->n.getId().getName().equals("hello")).count();
-                log.info("===========:{}",count);
-                List<Meter> list = meterRegistry.getMeters();
-                for (Meter meter :list){
-                    if ("hello".equals(meter.getId().getName()) && meter instanceof CumulativeTimer){
-                        CumulativeTimer cumulativeTimer = (CumulativeTimer)meter;
-                        log.info("==+consoleAllMeter====:{},:{},:{}",cumulativeTimer.getId().getName(),cumulativeTimer.takeSnapshot().toString(),cumulativeTimer);
-                    }
-                }
+                meterRegistry.getMeters().stream().filter( n->n.getId().getName().equals("hello") && n instanceof CumulativeTimer).forEach(
+                        meter -> {
+                            CumulativeTimer cumulativeTimer = (CumulativeTimer)meter;
+                            log.info("==+consoleAllMeter====:{},:{},:{}",cumulativeTimer.getId().getName(),cumulativeTimer.takeSnapshot().toString(),cumulativeTimer);
+                        }
+                );
+//                log.info("===========:{}",count);
+//                List<Meter> list = meterRegistry.getMeters();
+//                for (Meter meter :list){
+//                    if ("hello".equals(meter.getId().getName()) && meter instanceof CumulativeTimer){
+//                        CumulativeTimer cumulativeTimer = (CumulativeTimer)meter;
+//                        log.info("==+consoleAllMeter====:{},:{},:{}",cumulativeTimer.getId().getName(),cumulativeTimer.takeSnapshot().toString(),cumulativeTimer);
+//                    }
+//                }
                 Thread.sleep(5000);
             } catch (Exception e) {
                 e.printStackTrace();
