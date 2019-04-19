@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jim.spring.boot.spider.mapper.CarInfoMapper">
+	<!--查询字段-->
+	<sql id="columns">
+	    a.id,
+	    a.car_name,
+	    a.car_price,
+	    a.milleage,
+	    a.register_date,
+	    a.public_date,
+	    a.car_info_id,
+	    a.dealer_id,
+	    a.branch_id,
+	    a.series_id,
+	    a.city_code,
+	    a.cityName,
+	    a.parent_city_code,
+	    a.model_id,
+	    a.is_new_car,
+	    a.is_extend_repair,
+	    a.source,
+	    a.img_url,
+	    a.sold_out,
+	    a.create_at,
+	    a.update_at
+	</sql>
+	
+	<!--查询结果集-->
+	<resultMap id="beanMap" type="com.jim.spring.boot.spider.po.CarInfoPO">
+	    <result property="id" column="id"/>
+	    <result property="carName" column="car_name"/>
+	    <result property="carPrice" column="car_price"/>
+	    <result property="milleage" column="milleage"/>
+	    <result property="registerDate" column="register_date"/>
+	    <result property="publicDate" column="public_date"/>
+	    <result property="carInfoId" column="car_info_id"/>
+	    <result property="dealerId" column="dealer_id"/>
+	    <result property="branchId" column="branch_id"/>
+	    <result property="seriesId" column="series_id"/>
+	    <result property="cityCode" column="city_code"/>
+	    <result property="cityName" column="cityName"/>
+	    <result property="parentCityCode" column="parent_city_code"/>
+	    <result property="modelId" column="model_id"/>
+	    <result property="isNewCar" column="is_new_car"/>
+	    <result property="isExtendRepair" column="is_extend_repair"/>
+	    <result property="source" column="source"/>
+	    <result property="imgUrl" column="img_url"/>
+	    <result property="soldOut" column="sold_out"/>
+	    <result property="createAt" column="create_at"/>
+	    <result property="updateAt" column="update_at"/>
+	</resultMap>
+
+    <!--根据主键获取实体-->
+    <select id="get" resultMap="beanMap">
+        SELECT
+        <include refid="columns"/>
+        FROM
+	      ch_car_info a
+        WHERE
+	     id = #{id}
+    </select>
+
+    <!-- 新增记录 -->
+    <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="com.jim.spring.boot.spider.po.CarInfoPO">
+        INSERT INTO ch_car_info
+        (
+	    `car_name`,
+	    `car_price`,
+	    `milleage`,
+	    `register_date`,
+	    `public_date`,
+	    `car_info_id`,
+	    `dealer_id`,
+	    `branch_id`,
+	    `series_id`,
+	    `city_code`,
+	    `cityName`,
+	    `parent_city_code`,
+	    `model_id`,
+	    `is_new_car`,
+	    `is_extend_repair`,
+	    `source`,
+	    `img_url`,
+	    `create_at`,
+	    `update_at`
+        )
+        VALUES
+        (
+			#{carName},
+			#{carPrice},
+			#{milleage},
+			#{registerDate},
+			#{publicDate},
+			#{carInfoId},
+			#{dealerId},
+			#{branchId},
+			#{seriesId},
+			#{cityCode},
+			#{cityName},
+			#{parentCityCode},
+			#{modelId},
+			#{isNewCar},
+			#{isExtendRepair},
+			#{source},
+			#{imgUrl},
+			#{createAt},
+			#{updateAt}
+        )
+    </insert>
+
+
+    <!--更新实体信息-->
+    <update id="update" parameterType="com.jim.spring.boot.spider.po.CarInfoPO">
+        UPDATE
+	ch_car_info
+        SET
+        `car_name` = #{carName},
+        `car_price` = #{carPrice},
+        `milleage` = #{milleage},
+        `register_date` = #{registerDate},
+        `public_date` = #{publicDate},
+        `car_info_id` = #{carInfoId},
+        `dealer_id` = #{dealerId},
+        `branch_id` = #{branchId},
+        `series_id` = #{seriesId},
+        `city_code` = #{cityCode},
+        `cityName` = #{cityName},
+        `parent_city_code` = #{parentCityCode},
+        `model_id` = #{modelId},
+        `is_new_car` = #{isNewCar},
+        `is_extend_repair` = #{isExtendRepair},
+        `source` = #{source},
+        `img_url` = #{imgUrl},
+        `create_at` = #{createAt},
+        `update_at` = #{updateAt}
+        WHERE  id = #{id}
+    </update>
+
+    <!--更新实体信息，null值字段不更新-->
+    <update id="updateIgnoreNull" parameterType="com.jim.spring.boot.spider.po.CarInfoPO">
+        UPDATE ch_car_info
+        <set>
+              <if test="carName != null">
+                  `car_name` = #{carName},
+              </if>
+              <if test="carPrice != null">
+                  `car_price` = #{carPrice},
+              </if>
+              <if test="milleage != null">
+                  `milleage` = #{milleage},
+              </if>
+              <if test="registerDate != null">
+                  `register_date` = #{registerDate},
+              </if>
+              <if test="publicDate != null">
+                  `public_date` = #{publicDate},
+              </if>
+              <if test="carInfoId != null">
+                  `car_info_id` = #{carInfoId},
+              </if>
+              <if test="dealerId != null">
+                  `dealer_id` = #{dealerId},
+              </if>
+              <if test="branchId != null">
+                  `branch_id` = #{branchId},
+              </if>
+              <if test="seriesId != null">
+                  `series_id` = #{seriesId},
+              </if>
+              <if test="cityCode != null">
+                  `city_code` = #{cityCode},
+              </if>
+              <if test="cityName != null">
+                  `cityName` = #{cityName},
+              </if>
+              <if test="parentCityCode != null">
+                  `parent_city_code` = #{parentCityCode},
+              </if>
+              <if test="modelId != null">
+                  `model_id` = #{modelId},
+              </if>
+              <if test="isNewCar != null">
+                  `is_new_car` = #{isNewCar},
+              </if>
+              <if test="isExtendRepair != null">
+                  `is_extend_repair` = #{isExtendRepair},
+              </if>
+              <if test="source != null">
+                  `source` = #{source},
+              </if>
+              <if test="imgUrl != null">
+                  `img_url` = #{imgUrl},
+              </if>
+              <if test="createAt != null">
+                  `create_at` = #{createAt},
+              </if>
+              <if test="updateAt != null">
+                  `update_at` = #{updateAt},
+              </if>
+        </set>
+        WHERE   id = #{id}
+    </update>
+
+    <!--根据主键获取实体-->
+    <select id="getByCarInfoId" resultMap="beanMap">
+        SELECT
+        <include refid="columns"/>
+        FROM
+        ch_car_info a
+        WHERE
+        car_info_id = #{carInfoId}
+    </select>
+
+    <!--更新实体信息-->
+    <update id="updateByInfoId" parameterType="com.jim.spring.boot.spider.po.CarInfoPO">
+        UPDATE
+	      ch_car_info
+        SET
+        `car_name` = #{carName},
+        `car_price` = #{carPrice},
+        `milleage` = #{milleage},
+        `register_date` = #{registerDate},
+        `public_date` = #{publicDate},
+        `dealer_id` = #{dealerId},
+        `branch_id` = #{branchId},
+        `series_id` = #{seriesId},
+        `city_code` = #{cityCode},
+        `cityName` = #{cityName},
+        `parent_city_code` = #{parentCityCode},
+        `model_id` = #{modelId},
+        `is_new_car` = #{isNewCar},
+        `is_extend_repair` = #{isExtendRepair},
+        `source` = #{source},
+        `img_url` = #{imgUrl},
+        `update_at` = sysdate()
+        WHERE  `car_info_id` = #{carInfoId}
+    </update>
+
+
+    <!-- 新增记录 -->
+    <insert id="batchAdd" useGeneratedKeys="true" keyProperty="id" parameterType="com.jim.spring.boot.spider.po.CarInfoPO">
+        INSERT INTO ch_car_info
+        (
+	    `car_name`,
+	    `car_price`,
+	    `milleage`,
+	    `register_date`,
+	    `public_date`,
+	    `car_info_id`,
+	    `dealer_id`,
+	    `branch_id`,
+	    `series_id`,
+	    `city_code`,
+	    `cityName`,
+	    `parent_city_code`,
+	    `model_id`,
+	    `is_new_car`,
+	    `is_extend_repair`,
+	    `source`,
+	    `img_url`,
+	    `create_at`
+        )
+        VALUES
+        <foreach item="carInfoPO" index="index" separator="," collection="carInfoPOList">
+            (
+            #{carInfoPO.carName},
+            #{carInfoPO.carPrice},
+            #{carInfoPO.milleage},
+            #{carInfoPO.registerDate},
+            #{carInfoPO.publicDate},
+            #{carInfoPO.carInfoId},
+            #{carInfoPO.dealerId},
+            #{carInfoPO.branchId},
+            #{carInfoPO.seriesId},
+            #{carInfoPO.cityCode},
+            #{carInfoPO.cityName},
+            #{carInfoPO.parentCityCode},
+            #{carInfoPO.modelId},
+            #{carInfoPO.isNewCar},
+            #{carInfoPO.isExtendRepair},
+            #{carInfoPO.source},
+            #{carInfoPO.imgUrl},
+            #{carInfoPO.createAt}
+            )
+        </foreach>
+
+    </insert>
+
+    <!--根据主键获取实体-->
+    <select id="selectCount" resultType="java.lang.Integer">
+        SELECT
+        count(1)
+        FROM
+        ch_car_info a
+        WHERE
+        sold_out = '0'
+    </select>
+
+    <!--根据主键获取实体-->
+    <select id="selectByPage" resultMap="beanMap">
+        SELECT
+        <include refid="columns"/>
+        FROM
+        ch_car_info a
+        WHERE
+        sold_out = '0'
+        order by id desc
+        limit #{pageNo}, #{pageSize}
+    </select>
+
+    <!--更新实体信息-->
+    <update id="soldOut" >
+        UPDATE
+	      ch_car_info
+        SET
+        `sold_out` = #{soldOut}
+        WHERE  `id` = #{id}
+    </update>
+
+</mapper>

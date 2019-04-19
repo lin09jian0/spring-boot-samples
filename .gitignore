@@ -1,4 +1,4 @@
-/target/
+*/target/
 /bin/
 /src/main/webapp/WEB-INF/classes/
 /src/main/webapp/WEB-INF/lib/
@@ -7,9 +7,8 @@
 /.project
 .DS_Store
 /src/test/java/META-INF/MANIFEST.MF
-
 /.idea
-/*.iml
+/**/*.iml
 /classes/
 .ideaDataSources/
 *.ipr
@@ -17,5 +16,4 @@
 *.ids
 *.log
 本地仓库地址/
-/spring-integration-sample/log_dir_IS_UNDEFINED
-/spring-boot-metrics/target/
+*/log_dir_IS_UNDEFINED

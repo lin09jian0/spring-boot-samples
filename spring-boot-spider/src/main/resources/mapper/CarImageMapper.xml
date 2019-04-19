@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jim.spring.boot.spider.mapper.CarImageMapper">
+	<!--查询字段-->
+	<sql id="columns">
+	    a.id,
+	    a.car_id,
+	    a.car_info_id,
+	    a.image_url,
+	    a.create_at,
+	    a.update_at
+	</sql>
+	
+	<!--查询结果集-->
+	<resultMap id="beanMap" type="com.jim.spring.boot.spider.po.CarImagePO">
+	    <result property="id" column="id"/>
+	    <result property="carId" column="car_id"/>
+	    <result property="carInfoId" column="car_info_id"/>
+	    <result property="imageUrl" column="image_url"/>
+	    <result property="createAt" column="create_at"/>
+	    <result property="updateAt" column="update_at"/>
+	</resultMap>
+
+    <!--根据主键获取实体-->
+    <select id="get" resultMap="beanMap">
+        SELECT
+        <include refid="columns"/>
+        FROM
+	ch_car_image a
+        WHERE
+	     id = #{id}
+    </select>
+
+    <!-- 新增记录 -->
+    <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="com.jim.spring.boot.spider.po.CarImagePO">
+        INSERT INTO ch_car_image
+        (
+	    `car_id`,
+	    `car_info_id`,
+	    `image_url`,
+	    `create_at`
+        )
+        VALUES
+        (
+			#{carId},
+			#{carInfoId},
+			#{imageUrl},
+			sysdate()
+        )
+    </insert>
+
+
+    <!--更新实体信息-->
+    <update id="update" parameterType="com.jim.spring.boot.spider.po.CarImagePO">
+        UPDATE
+	ch_car_image
+        SET
+        `car_id` = #{carId},
+        `car_info_id` = #{carInfoId},
+        `image_url` = #{imageUrl}
+        WHERE  id = #{id}
+    </update>
+
+    <!--更新实体信息，null值字段不更新-->
+    <update id="updateIgnoreNull" parameterType="com.jim.spring.boot.spider.po.CarImagePO">
+        UPDATE ch_car_image
+        <set>
+              <if test="carId != null">
+                  `car_id` = #{carId},
+              </if>
+              <if test="carInfoId != null">
+                  `car_info_id` = #{carInfoId},
+              </if>
+              <if test="imageUrl != null">
+                  `image_url` = #{imageUrl},
+              </if>
+        </set>
+        WHERE   id = #{id}
+    </update>
+
+
+    <!--根据主键获取实体-->
+    <select id="selectByCarId" resultMap="beanMap">
+        SELECT
+        <include refid="columns"/>
+        FROM
+        ch_car_image a
+        WHERE
+        `car_id` = #{carId}
+    </select>
+
+</mapper>

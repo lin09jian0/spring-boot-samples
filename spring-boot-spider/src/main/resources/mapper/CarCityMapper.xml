@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jim.spring.boot.spider.mapper.CarCityMapper">
+	<!--查询字段-->
+	<sql id="columns">
+	    a.id,
+	    a.code,
+	    a.parent_code,
+	    a.name,
+	    a.name_spelling,
+	    a.part_url,
+	    a.list_key,
+	    a.create_at,
+	    a.update_at
+	</sql>
+	
+	<!--查询结果集-->
+	<resultMap id="beanMap" type="com.jim.spring.boot.spider.po.CarCityPO">
+	    <result property="id" column="id"/>
+	    <result property="code" column="code"/>
+	    <result property="parentCode" column="parent_code"/>
+	    <result property="name" column="name"/>
+	    <result property="nameSpelling" column="name_spelling"/>
+	    <result property="partUrl" column="part_url"/>
+	    <result property="listKey" column="list_key"/>
+	    <result property="createAt" column="create_at"/>
+	    <result property="updateAt" column="update_at"/>
+	</resultMap>
+
+    <!--根据主键获取实体-->
+    <select id="get" resultMap="beanMap">
+        SELECT
+        <include refid="columns"/>
+        FROM
+	ch_car_city a
+        WHERE
+	     id = #{id}
+    </select>
+
+    <!-- 新增记录 -->
+    <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="com.jim.spring.boot.spider.po.CarCityPO">
+        INSERT INTO ch_car_city
+        (
+	    `code`,
+	    `parent_code`,
+	    `name`,
+	    `name_spelling`,
+	    `part_url`,
+	    `list_key`,
+	    `create_at`,
+	    `update_at`
+        )
+        VALUES
+        (
+			#{code},
+			#{parentCode},
+			#{name},
+			#{nameSpelling},
+			#{partUrl},
+			#{listKey},
+			#{createAt},
+			#{updateAt}
+        )
+    </insert>
+
+
+    <!--更新实体信息-->
+    <update id="update" parameterType="com.jim.spring.boot.spider.po.CarCityPO">
+        UPDATE
+	ch_car_city
+        SET
+        `code` = #{code},
+        `parent_code` = #{parentCode},
+        `name` = #{name},
+        `name_spelling` = #{nameSpelling},
+        `part_url` = #{partUrl},
+        `list_key` = #{listKey},
+        `create_at` = #{createAt},
+        `update_at` = #{updateAt}
+        WHERE  id = #{id}
+    </update>
+
+    <!--更新实体信息，null值字段不更新-->
+    <update id="updateIgnoreNull" parameterType="com.jim.spring.boot.spider.po.CarCityPO">
+        UPDATE ch_car_city
+        <set>
+              <if test="code != null">
+                  `code` = #{code},
+              </if>
+              <if test="parentCode != null">
+                  `parent_code` = #{parentCode},
+              </if>
+              <if test="name != null">
+                  `name` = #{name},
+              </if>
+              <if test="nameSpelling != null">
+                  `name_spelling` = #{nameSpelling},
+              </if>
+              <if test="partUrl != null">
+                  `part_url` = #{partUrl},
+              </if>
+              <if test="listKey != null">
+                  `list_key` = #{listKey},
+              </if>
+              <if test="createAt != null">
+                  `create_at` = #{createAt},
+              </if>
+              <if test="updateAt != null">
+                  `update_at` = #{updateAt},
+              </if>
+        </set>
+        WHERE   id = #{id}
+    </update>
+
+    <!--根据主键获取实体-->
+    <select id="list" resultMap="beanMap">
+        SELECT
+        <include refid="columns"/>
+        FROM
+        ch_car_city a
+    </select>
+
+</mapper>

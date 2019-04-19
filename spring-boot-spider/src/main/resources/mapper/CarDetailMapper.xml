@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jim.spring.boot.spider.mapper.CarDetailMapper">
+	<!--查询字段-->
+	<sql id="columns">
+	    a.id,
+	    a.car_id,
+	    a.car_info_id,
+	    a.annual_survey_date,
+	    a.insurance_date,
+	    a.guarantee_expires,
+	    a.emission_standard,
+	    a.transfer_count,
+	    a.use,
+	    a.maintain,
+	    a.dealer_name,
+	    a.car_desc,
+	    a.engine,
+	    a.transmission,
+	    a.vehicle_level,
+	    a.color,
+	    a.fuel_label,
+	    a.drive_mode,
+	    a.create_at,
+	    a.update_at
+	</sql>
+	
+	<!--查询结果集-->
+	<resultMap id="beanMap" type="com.jim.spring.boot.spider.po.CarDetailPO">
+	    <result property="id" column="id"/>
+	    <result property="carId" column="car_id"/>
+	    <result property="carInfoId" column="car_info_id"/>
+	    <result property="annualSurveyDate" column="annual_survey_date"/>
+	    <result property="insuranceDate" column="insurance_date"/>
+	    <result property="guaranteeExpires" column="guarantee_expires"/>
+	    <result property="emissionStandard" column="emission_standard"/>
+	    <result property="transferCount" column="transfer_count"/>
+	    <result property="use" column="use"/>
+	    <result property="maintain" column="maintain"/>
+	    <result property="dealerName" column="dealer_name"/>
+	    <result property="carDesc" column="car_desc"/>
+	    <result property="engine" column="engine"/>
+	    <result property="transmission" column="transmission"/>
+	    <result property="vehicleLevel" column="vehicle_level"/>
+	    <result property="color" column="color"/>
+	    <result property="fuelLabel" column="fuel_label"/>
+	    <result property="driveMode" column="drive_mode"/>
+	    <result property="createAt" column="create_at"/>
+	    <result property="updateAt" column="update_at"/>
+	</resultMap>
+
+    <!--根据主键获取实体-->
+    <select id="get" resultMap="beanMap">
+        SELECT
+        <include refid="columns"/>
+        FROM
+	ch_car_detail a
+        WHERE
+	     id = #{id}
+    </select>
+
+    <!-- 新增记录 -->
+    <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="com.jim.spring.boot.spider.po.CarDetailPO">
+        INSERT INTO ch_car_detail
+        (
+	    `car_id`,
+	    `car_info_id`,
+	    `annual_survey_date`,
+	    `insurance_date`,
+	    `guarantee_expires`,
+	    `emission_standard`,
+	    `transfer_count`,
+	    `use`,
+	    `maintain`,
+	    `dealer_name`,
+	    `car_desc`,
+	    `engine`,
+	    `transmission`,
+	    `vehicle_level`,
+	    `color`,
+	    `fuel_label`,
+	    `drive_mode`,
+	    `create_at`
+        )
+        VALUES
+        (
+			#{carId},
+			#{carInfoId},
+			#{annualSurveyDate},
+			#{insuranceDate},
+			#{guaranteeExpires},
+			#{emissionStandard},
+			#{transferCount},
+			#{use},
+			#{maintain},
+			#{dealerName},
+			#{carDesc},
+			#{engine},
+			#{transmission},
+			#{vehicleLevel},
+			#{color},
+			#{fuelLabel},
+			#{driveMode},
+			sysdate()
+        )
+    </insert>
+
+
+    <!--更新实体信息-->
+    <update id="update" parameterType="com.jim.spring.boot.spider.po.CarDetailPO">
+        UPDATE
+	ch_car_detail
+        SET
+        `car_id` = #{carId},
+        `car_info_id` = #{carInfoId},
+        `annual_survey_date` = #{annualSurveyDate},
+        `insurance_date` = #{insuranceDate},
+        `guarantee_expires` = #{guaranteeExpires},
+        `emission_standard` = #{emissionStandard},
+        `transfer_count` = #{transferCount},
+        `use` = #{use},
+        `maintain` = #{maintain},
+        `dealer_name` = #{dealerName},
+        `car_desc` = #{carDesc},
+        `engine` = #{engine},
+        `transmission` = #{transmission},
+        `vehicle_level` = #{vehicleLevel},
+        `color` = #{color},
+        `fuel_label` = #{fuelLabel},
+        `drive_mode` = #{driveMode}
+        WHERE  id = #{id}
+    </update>
+
+    <!--更新实体信息，null值字段不更新-->
+    <update id="updateIgnoreNull" parameterType="com.jim.spring.boot.spider.po.CarDetailPO">
+        UPDATE ch_car_detail
+        <set>
+              <if test="carId != null">
+                  `car_id` = #{carId},
+              </if>
+              <if test="carInfoId != null">
+                  `car_info_id` = #{carInfoId},
+              </if>
+              <if test="annualSurveyDate != null">
+                  `annual_survey_date` = #{annualSurveyDate},
+              </if>
+              <if test="insuranceDate != null">
+                  `insurance_date` = #{insuranceDate},
+              </if>
+              <if test="guaranteeExpires != null">
+                  `guarantee_expires` = #{guaranteeExpires},
+              </if>
+              <if test="emissionStandard != null">
+                  `emission_standard` = #{emissionStandard},
+              </if>
+              <if test="transferCount != null">
+                  `transfer_count` = #{transferCount},
+              </if>
+              <if test="use != null">
+                  `use` = #{use},
+              </if>
+              <if test="maintain != null">
+                  `maintain` = #{maintain},
+              </if>
+              <if test="dealerName != null">
+                  `dealer_name` = #{dealerName},
+              </if>
+              <if test="carDesc != null">
+                  `car_desc` = #{carDesc},
+              </if>
+              <if test="engine != null">
+                  `engine` = #{engine},
+              </if>
+              <if test="transmission != null">
+                  `transmission` = #{transmission},
+              </if>
+              <if test="vehicleLevel != null">
+                  `vehicle_level` = #{vehicleLevel},
+              </if>
+              <if test="color != null">
+                  `color` = #{color},
+              </if>
+              <if test="fuelLabel != null">
+                  `fuel_label` = #{fuelLabel},
+              </if>
+              <if test="driveMode != null">
+                  `drive_mode` = #{driveMode},
+              </if>
+        </set>
+        WHERE   id = #{id}
+    </update>
+
+    <!--根据主键获取实体-->
+    <select id="selectByCarId" resultMap="beanMap">
+        SELECT
+        <include refid="columns"/>
+        FROM
+        ch_car_detail a
+        WHERE
+        `car_id` = #{carId}
+    </select>
+
+</mapper>

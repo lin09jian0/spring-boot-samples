@@ -11,6 +11,10 @@
     <modules>
         <module>spring-boot-metrics</module>
         <module>spring-boot-graphql</module>
+        <module>spring-cloud-slueth</module>
+        <module>spring-boot-demo</module>
+        <module>spring-boot-video</module>
+        <module>spring-boot-spider</module>
     </modules>
 
     <parent>
@@ -62,7 +66,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Finchley.RELEASE</version>
+                <version>Finchley.SR1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -78,6 +82,13 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>cn.victorplus.integration.IntegrationBootstrap</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>
