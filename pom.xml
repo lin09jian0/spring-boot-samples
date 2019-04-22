@@ -13,8 +13,9 @@
         <module>spring-boot-graphql</module>
         <module>spring-cloud-slueth</module>
         <module>spring-boot-demo</module>
-        <module>spring-boot-video</module>
         <module>spring-boot-spider</module>
+        <module>spring-cloud-nacos-provider</module>
+        <module>spring-cloud-nacos-consumer</module>
     </modules>
 
     <parent>
@@ -30,6 +31,7 @@
         <java.version>1.8</java.version>
         <log4j-over-slf4j.version>1.7.5</log4j-over-slf4j.version>
         <lombok.version>1.16.8</lombok.version>
+        <spring.cloud.nacos.version>0.2.1.RELEASE</spring.cloud.nacos.version>
     </properties>
 
     <dependencies>
@@ -69,6 +71,12 @@
                 <version>Finchley.SR1</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${spring.cloud.nacos.version}</version>
             </dependency>
 
         </dependencies>
