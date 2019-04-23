@@ -16,6 +16,7 @@
         <module>spring-boot-spider</module>
         <module>spring-cloud-nacos-provider</module>
         <module>spring-cloud-nacos-consumer</module>
+        <module>spring-cloud-nacos-config</module>
     </modules>
 
     <parent>
@@ -75,9 +76,17 @@
 
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-                <version>${spring.cloud.nacos.version}</version>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>0.2.1.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
+
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.cloud</groupId>-->
+                <!--<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
+                <!--<version>${spring.cloud.nacos.version}</version>-->
+            <!--</dependency>-->
 
         </dependencies>
     </dependencyManagement>
