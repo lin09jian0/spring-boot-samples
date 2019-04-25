@@ -1,0 +1,9 @@
+[
+  {
+    "resource": "/hello4",
+    "limitApp": "default",
+    "count": 300.0,
+    "timeWindow": 2,
+    "grade": 0
+  }
+]

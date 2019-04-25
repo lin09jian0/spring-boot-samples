@@ -1,0 +1,26 @@
+[
+    {
+      "limitApp": "default",
+      "resource": "hello3",
+      "grade": 1,
+      "count": 1.0,
+      "strategy": 0,
+      "refResource": null,
+      "controlBehavior": 0,
+      "warmUpPeriodSec": 10,
+      "maxQueueingTimeMs": 500,
+      "clusterMode": false
+    },
+    {
+      "limitApp": "default",
+      "resource": "/hello",
+      "grade": 1,
+      "count": 1.0,
+      "strategy": 0,
+      "refResource": null,
+      "controlBehavior": 0,
+      "warmUpPeriodSec": 10,
+      "maxQueueingTimeMs": 500,
+      "clusterMode": false
+    }
+]

@@ -17,6 +17,7 @@
         <module>spring-cloud-nacos-provider</module>
         <module>spring-cloud-nacos-consumer</module>
         <module>spring-cloud-nacos-config</module>
+        <module>spring-cloud-sentinel</module>
     </modules>
 
     <parent>
